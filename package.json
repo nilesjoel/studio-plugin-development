@@ -18,13 +18,13 @@
     "pg-connection-string": "^2.5.0"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "@nilesjoel"
   },
   "strapi": {
     "uuid": "cf36184e-3eb4-40f1-aa6b-d696d091fc7a"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
+    "node": "16.13.0",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
