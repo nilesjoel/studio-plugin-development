@@ -1,0 +1,187 @@
+diff --git a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
+index 752f3a6..e05ff01 100644
+--- a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
++++ b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
+@@ -39,7 +39,7 @@ const LinkUser = styled(RouterNavLink)`
+ 
+   &:hover {
+     background: ${({ theme, logout }) =>
+-      logout ? theme.colors.danger100 : theme.colors.primary100};
++    logout ? theme.colors.danger100 : theme.colors.primary100};
+     text-decoration: none;
+   }
+ 
+@@ -51,6 +51,8 @@ const LinkUser = styled(RouterNavLink)`
+ `;
+ 
+ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
++
++  console.log({ generalSectionLinks })
+   const buttonRef = useRef();
+   const [userLinksVisible, setUserLinksVisible] = useState(false);
+   const {
+@@ -90,7 +92,7 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+ 
+   const menuTitle = formatMessage({
+     id: 'app.components.LeftMenu.navbrand.title',
+-    defaultMessage: 'Strapi Dashboard',
++    defaultMessage: 'Dashboard',
+   });
+ 
+   return (
+@@ -102,15 +104,15 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+           defaultMessage: 'Workplace',
+         })}
+         title={menuTitle}
+-        icon={
+-          <img
+-            src={menu.custom || menu.default}
+-            alt={formatMessage({
+-              id: 'app.components.LeftMenu.logo.alt',
+-              defaultMessage: 'Application logo',
+-            })}
+-          />
+-        }
++      // icon={
++      //   <img
++      //     src={menu.custom || menu.default}
++      //     alt={formatMessage({
++      //       id: 'app.components.LeftMenu.logo.alt',
++      //       defaultMessage: 'Application logo',
++      //     })}
++      //   />
++      // }
+       />
+ 
+       <Divider />
+@@ -154,26 +156,34 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+           <NavSection
+             label={formatMessage({
+               id: 'app.components.LeftMenu.general',
+-              defaultMessage: 'General',
++              defaultMessage: 'Settings',
+             })}
+           >
+             {generalSectionLinks.map((link) => {
+               const LinkIcon = link.icon;
+ 
+-              return (
+-                <NavLink
+-                  as={RouterNavLink}
+-                  badgeContent={
+-                    (link.notificationsCount > 0 && link.notificationsCount.toString()) || undefined
+-                  }
+-                  to={link.to}
+-                  key={link.to}
+-                  icon={<LinkIcon />}
+-                  onClick={() => handleClickOnLink(link.to)}
+-                >
+-                  {formatMessage(link.intlLabel)}
+-                </NavLink>
+-              );
++
++                const { id, defaultMessage } = link.intlLabel;
++
++                if(id==="global.settings"){
++                  return (
++                    <>
++                      <NavLink
++                      as={RouterNavLink}
++                      badgeContent={
++                        (link.notificationsCount > 0 && link.notificationsCount.toString()) || undefined
++                      }
++                      to={link.to}
++                      key={link.to}
++                      icon={<LinkIcon />}
++                      onClick={() => handleClickOnLink(link.to)}
++                    >
++                      {formatMessage(link.intlLabel)}
++                    </NavLink>
++                    </>
++                  );
++  
++                }
+             })}
+           </NavSection>
+         ) : null}
+@@ -222,13 +232,13 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+       <NavCondense onClick={() => setCondensed((s) => !s)}>
+         {condensed
+           ? formatMessage({
+-              id: 'app.components.LeftMenu.expand',
+-              defaultMessage: 'Expand the navbar',
+-            })
++            id: 'app.components.LeftMenu.expand',
++            defaultMessage: 'Expand the navbar',
++          })
+           : formatMessage({
+-              id: 'app.components.LeftMenu.collapse',
+-              defaultMessage: 'Collapse the navbar',
+-            })}
++            id: 'app.components.LeftMenu.collapse',
++            defaultMessage: 'Collapse the navbar',
++          })}
+       </NavCondense>
+     </MainNav>
+   );
+diff --git a/node_modules/@strapi/admin/admin/src/pages/HomePage/assets/studio-logo.png b/node_modules/@strapi/admin/admin/src/pages/HomePage/assets/studio-logo.png
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js b/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
+index 68a2188..d21f1b8 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
++++ b/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
+@@ -13,14 +13,16 @@ import { Layout } from '@strapi/design-system/Layout';
+ import { Main } from '@strapi/design-system/Main';
+ import { Box } from '@strapi/design-system/Box';
+ import { Grid, GridItem } from '@strapi/design-system/Grid';
+-import cornerOrnamentPath from './assets/corner-ornament.svg';
++import { Flex } from '@strapi/design-system/Flex';
++// import cornerOrnamentPath from './assets/corner-ornament.svg';
++import studioLogoPath from './assets/studio-logo.png'
+ import { useModels } from '../../hooks';
+ import isGuidedTourCompleted from '../../components/GuidedTour/utils/isGuidedTourCompleted';
+ import GuidedTourHomepage from '../../components/GuidedTour/Homepage';
+ import SocialLinks from './SocialLinks';
+ import HomeHeader from './HomeHeader';
+ import ContentBlocks from './ContentBlocks';
+-
++import { Typography } from '@strapi/design-system/Typography';
+ const LogoContainer = styled(Box)`
+   position: absolute;
+   top: 0;
+@@ -65,7 +67,7 @@ const HomePage = () => {
+       </FormattedMessage>
+       <Main>
+         <LogoContainer>
+-          <img alt="" aria-hidden src={cornerOrnamentPath} />
++          <img alt="" aria-hidden src={studioLogoPath} />
+         </LogoContainer>
+         <Box padding={10}>
+           <Grid>
+@@ -76,14 +78,23 @@ const HomePage = () => {
+               />
+             </GridItem>
+           </Grid>
+-          <Grid gap={6}>
++          <Flex
++            id="customizedCenterContainer"
++            direction="column"
++            alignContent="stretch"
++            justifyContent="space-around">
++            <Box>
++              <Typography>{"This is a Box in a Flex."}</Typography>
++            </Box>
++          </Flex>
++          {/* <Grid gap={6}>
+             <GridItem col={8} s={12}>
+               {showGuidedTour ? <GuidedTourHomepage /> : <ContentBlocks />}
+             </GridItem>
+             <GridItem col={4} s={12}>
+               <SocialLinks />
+             </GridItem>
+-          </Grid>
++          </Grid> */}
+         </Box>
+       </Main>
+     </Layout>

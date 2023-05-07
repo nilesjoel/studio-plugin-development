@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "channels",
+  "info": {
+    "singularName": "channel",
+    "pluralName": "channels",
+    "displayName": "Channel",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::studio-profile.profile"
+    },
+    "password": {
+      "type": "password"
+    },
+    "handle": {
+      "type": "string"
+    }
+  }
+}
