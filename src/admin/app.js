@@ -70,7 +70,7 @@ const colorKeys = {
         // },
         en: {
           // Menu Branding
-          "app.components.LeftMenu.navbrand.title": "Studio Development",
+          "app.components.LeftMenu.navbrand.title": "Studio Plugin Dev",
           "app.components.LeftMenu.navbrand.workplace": "Workspace",
           // Welcome Message
           "app.components.HomePage.welcome.again": "Hey Niles!",
@@ -78,7 +78,7 @@ const colorKeys = {
           "app.components.HomePage.welcomeBlock.content.again": "You got this.",
           "Auth.form.username.placeholder": "e.g. nilesjoel",
           "Auth.form.welcome.subtitle": "Log in to your Studio account",
-          "Auth.form.welcome.title": "Studio Dev",
+          "Auth.form.welcome.title": "Studio Plugin Dev",
           "Auth.link.forgot-password": "Forgot your password?",
         },
       },

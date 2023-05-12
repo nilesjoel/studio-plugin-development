@@ -22,6 +22,7 @@
     "@studiosymmetries/studio-market": "workspace:^",
     "@studiosymmetries/studio-profile": "workspace:^",
     "@studiosymmetries/studio-social": "workspace:^",
+    "@studiosymmetries/studio-website": "workspace:^",
     "better-sqlite3": "8.0.1",
     "instagram-private-api": "^1.45.3",
     "patch-package": "^7.0.0",
