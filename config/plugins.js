@@ -1,3 +1,8 @@
+const magic = {
+  secret: process.env.MAGIC_SECRET_KEY,
+  publishable: process.env.MAGIC_PUBLISHABLE_KEY,
+};
+
 module.exports = ({ env }) => ({
     // ...
     upload: {
@@ -25,6 +30,7 @@ module.exports = ({ env }) => ({
           defaultReplyTo: env('EMAIL_DEFAULT_REPLY_TO'),
         },
       },
-    }
+    },
+    
     // ...
   })
